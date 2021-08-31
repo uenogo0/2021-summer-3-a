@@ -3,13 +3,13 @@
    <meta charset="utf-8">
    <meta name="top-PAGE" content="gannbaru">
    <title>投稿しよう</title>
-   <link rel="stylesheet" href="kamera.css">
+   <link rel="stylesheet" href="style.css">
 </head>
 
 <body style="text-align:center">
 <video id="player" autoplay></video><br>
 <form action="#" method="post">
-	<textarea name="comment" cols="200" rows="5" placeholder="コメントを付けてみよう"></textarea></p>
+	<textarea name="comment" cols="100" rows="5" placeholder="コメントを付けてみよう"></textarea></p>
 </form>
 <br><br><br><br><br><br><br><br>
 <button id="capture"><img src="cicon.png" alt="送信" /></button>
@@ -18,7 +18,7 @@
 
 </body>
 <script type=module>
-    //端末がカメラが対応している
+    //端末にカメラが対応している
     const suppoet='mediaDevices' in navigator;
 
     if(suppoet){
@@ -38,4 +38,15 @@
     }else{
         alert("非対応");
     }
+    //送信用
+    document.getElementById("capture").onclick = function() {
+    };
+    /*
+    xhr = new XMLHttpRequest();
+    function post() {
+        xhr.open('POST', 'calc.php', true);
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        xhr.send(request);
+    }
+    */
 </script>

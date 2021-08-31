@@ -8,7 +8,7 @@
    <link rel="stylesheet" 
     href="https://unpkg.com/ress/dist/ress.min.css">
    <link rel="stylesheet" 
-    href="style.css">
+    href="test.css">
    <link rel="stylesheet" type="text/css" 
     href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
    <link rel="stylesheet" type="text/css" 
@@ -16,18 +16,14 @@
    <link rel="stylesheet" type="text/css" 
     href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/css/6-1-6.css">
 </head>
-<header class=page-header　wrapper>
-  <h1><a href=index.html>タイトル</a></h1>
-  
-  </header>
 <body>
-<!--上にスクロールするとカメラ-->
-
-  <!--urlは画像の人のに-->
-  <h2><a href=profile.html>ユーザプロフィール(名前)</a></h2>
   <!--スクロールしてるとこ。画像と文字はプレスホルダーなので、後に変更できるようにする
-  　クリックするとファボれたりプロフィールに飛べるようにもする
-    それと、なんかバグるから画像の保存を750*500にしたい-->
+  　クリックするとファボれたりプロフィールに飛べるようにもする-->
+  <p class="slider">
+    <img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg" alt="サルワカくんの顔"/>
+    <img src="rode.png"/>
+    </p>
+    </p>
   <div class="slider">
     <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg" alt="">
       <p class="sc_chr">コレはテストです１<p></li>
@@ -43,14 +39,15 @@
       <p class="sc_chr">コレはテストです６<p></li>
     <li><img src="rode.png" alt=""></li><!--全然つづりが違う-->
       </div>
-      <p class="slick-num">
-        <span class="inner">
-            <span class="nowcnt"></span> ／ <span class="allcnt"></span>
-        </span>
-      </p>
   <!--ライセンス関係なので消してはいけない-->
   <p>使用したライブラリ：<a href="https://kenwheeler.github.io/slick/" 
     target="_blank">https://kenwheeler.github.io/slick/</a></p>
+
+    <p class="slick-num">
+      <span class="inner">
+          <span class="nowcnt"></span> ／ <span class="allcnt"></span>
+      </span>
+    </p>
 
     <!--以下JS-->
     <script type=module>
@@ -60,12 +57,6 @@
 	    var i = (currentSlide ? currentSlide : 0) + 1;
 	    $('.slick-num .nowcnt').text(i);
 	    $('.slick-num .allcnt').text(slick.slideCount);
-      if(i==slick.slideCount){
-        ////////////////////////////////////
-        //更新の処理を書く場所//歩数も減らす
-        /////////////////////////////////
-        window.location.href = 'index.html'; 
-      }
     });
     $('.slider').slick({
     autoplay: false,//自動的に動き出すか。
@@ -75,7 +66,6 @@
     prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
     nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
     dots: true,//下部ドットナビゲーションの表示
-    /*
     responsive: [
       {
       breakpoint: 769,//モニターの横幅
@@ -91,8 +81,11 @@
         slidesToScroll: 1,//移動量
       }
     }
-  ]*/
+  ]
   });
+  //var i = (currentSlide ? currentSlide : 0) + 1;
+  //$status.text(i + ' / ' + slick.slideCount);
+  //alert(slideCount);
     </script>
     <!--jquery-->
     <script type="text/javascript" 
@@ -101,6 +94,6 @@
     <script type="text/javascript" 
      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-     <h1><a href=test.html>テスト用</a></h1>
+     <h1><a href=index.html>元画面</a></h1>
 </body>
 </html>

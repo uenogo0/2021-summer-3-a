@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
-/* 共通部分
+/* 共通部分 
 ------------------------------- */
 html {
     font-size: 100%;
 }
 body{
     line-height: 1.7;
+    background-color: aquamarine;
    
 }
 a {
@@ -15,3 +16,30 @@ a {
 img {
     max-width: 100%;
 }
+
+.textlines {
+    border: 2px solid #0a0;  /* 枠線 */
+    border-radius: 0.67em;   /* 角丸 */
+    padding: 0.5em;          /* 内側の余白量 */
+    background-color: snow;  /* 背景色 */
+    width: 20em;             /* 横幅 */
+    height: 120px;           /* 高さ */
+    font-size: 1em;          /* 文字サイズ */
+    line-height: 1.2;        /* 行の高さ */
+   }
+div {
+    text-align: center;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+

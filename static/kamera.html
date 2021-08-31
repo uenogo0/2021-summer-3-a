@@ -1,9 +1,9 @@
 <video id="player" autoplay></video>
 <button id="capture">Capture</button>
-<canvas id="canvas" width="480" height="640"></canvas>
+<canvas id="canvas" width="481" height="640"></canvas>
 <h1>1111</h1>
 <script type=module>
-    //端末がカメラが対応しているかな
+    //端末がカメラが対応している
     const suppoet='mediaDevices' in navigator;
 
     if(suppoet){
@@ -14,7 +14,7 @@
       const constraints = {
       video: true,
     };
-    //contextが写真です
+    //contextが写真
     captureButton.addEventListener('click', () => {
     context.drawImage(player, 50, 0, 200, 200);
     });

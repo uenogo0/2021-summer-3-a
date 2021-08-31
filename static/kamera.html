@@ -2,7 +2,7 @@
 <head>
    <meta charset="utf-8">
    <meta name="top-PAGE" content="gannbaru">
-   <title>投稿をしよう</title>
+   <title>投稿しよう</title>
    <link rel="stylesheet" href="kamera.css">
 </head>
 
@@ -18,7 +18,7 @@
 
 </body>
 <script type=module>
-    //端末にカメラが対応している
+    //端末がカメラが対応している
     const suppoet='mediaDevices' in navigator;
 
     if(suppoet){
@@ -27,7 +27,7 @@
       const context = canvas.getContext('2d');
       const captureButton = document.getElementById('capture');
       const constraints = {video: true,};
-    //contextは写真
+    //contextが写真
     /*captureButton.addEventListener('click', () => {
     context.drawImage(player, 50, 0, 200, 200);
     });*/

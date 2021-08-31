@@ -1,18 +1,17 @@
-@charset "UTF-8"
+@charset "UTF-8";
 
-/* 共通部分--------------------------  */
-html{ 
-font-size: 100%;
+/* 共通部分
+------------------------------- */
+html {
+    font-size: 100%;
 }
-
-body {
-      line-height: 1.7;
+body{
+    line-height: 1.7;
+   
 }
-
 a {
-   text-decoration: none;  
+    text-decoration: none;
 }
-
 img {
-      max-width: 100%;
+    max-width: 100%;
 }

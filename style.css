@@ -5,41 +5,114 @@
 html {
     font-size: 100%;
 }
-body{
-    line-height: 1.7;
-    background-color: aquamarine;
-   
-}
-a {
-    text-decoration: none;
-}
-img {
-    max-width: 100%;
-}
-
-.textlines {
-    border: 2px solid #0a0;  /* 枠線 */
-    border-radius: 0.67em;   /* 角丸 */
-    padding: 0.5em;          /* 内側の余白量 */
-    background-color: snow;  /* 背景色 */
-    width: 20em;             /* 横幅 */
-    height: 120px;           /* 高さ */
-    font-size: 1em;          /* 文字サイズ */
-    line-height: 1.2;        /* 行の高さ */
-   }
-div {
-    text-align: center;
-}
-
+textarea {
+    width: 600px;
+    height: 70px;
+    font-size: 30px;
+    }
 .page-header {
-    display: flex;
-    justify-content: space-between;
-    
-}
-
+        display: flex;
+        justify-content: space-between;
+    }   
 .wrapper {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 0 4%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 4%;
+    }   
+
+/*==================================================
+スライダーのためのcss
+===================================*/
+.slider {/*横幅94%で左右に余白を持たせて中央寄せ*/
+   width:94%;
+    margin:0 auto;
 }
 
+.slider img {
+    width:100%;/*スライダー内の画像を横幅100%に*/
+    height:auto;
+}
+
+/*slickのJSで書かれるタグ内、スライド左右の余白調整*/
+
+.slider .slick-slide {
+    margin:0 10px;
+}
+
+/*矢印の設定*/
+
+/*戻る、次へ矢印の位置*/
+.slick-prev, 
+.slick-next {
+    position: absolute;/*絶対配置にする*/
+    top: 42%;
+    cursor: pointer;/*マウスカーソルを指マークに*/
+    outline: none;/*クリックをしたら出てくる枠線を消す*/
+    border-top: 2px solid #666;/*矢印の色*/
+    border-right: 2px solid #666;/*矢印の色*/
+    height: 15px;
+    width: 15px;
+}
+
+.slick-prev {/*戻る矢印の位置と形状*/
+    left: -1.5%;
+    transform: rotate(-135deg);
+}
+
+.slick-next {/*次へ矢印の位置と形状*/
+    right: -1.5%;
+    transform: rotate(45deg);
+}
+
+/*ドットナビゲーションの設定*/
+
+.slick-dots {
+    text-align:center;
+  margin:20px 0 0 0;
+}
+
+.slick-dots li {
+    display:inline-block;
+  margin:0 5px;
+}
+
+.slick-dots button {
+    color: transparent;
+    outline: none;
+    width:8px;/*ドットボタンのサイズ*/
+    height:8px;/*ドットボタンのサイズ*/
+    display:block;
+    border-radius:50%;
+    background:#ccc;/*ドットボタンの色*/
+}
+
+.slick-dots .slick-active button{
+    background:#333;/*ドットボタンの現在地表示の色*/
+}
+
+
+/*========= レイアウトのためのCSS ===============*/
+
+body{
+  background:#eee;
+}
+
+h2,p {
+    text-align:center;
+    padding:20px;
+}
+
+ul{
+  margin:0;
+  padding: 0;
+  list-style: none;
+}
+
+a{
+  color: #333;
+}
+
+a:hover,
+a:active{
+  text-decoration: none;
+}

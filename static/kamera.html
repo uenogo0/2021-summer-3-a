@@ -1,7 +1,22 @@
-<video id="player" autoplay></video>
-<button id="capture">Capture</button>
-<canvas id="canvas" width="481" height="640"></canvas>
-<h1>1111</h1>
+<html lang="ja">
+<head>
+   <meta charset="utf-8">
+   <meta name="top-PAGE" content="gannbaru">
+   <title>投稿しよう</title>
+   <link rel="stylesheet" href="kamera.css">
+</head>
+
+<body style="text-align:center">
+<video id="player" autoplay></video><br>
+<form action="#" method="post">
+	<textarea name="comment" cols="200" rows="5" placeholder="コメントを付けてみよう"></textarea></p>
+</form>
+<br><br><br><br><br><br><br><br>
+<button id="capture"><img src="cicon.png" alt="送信" /></button>
+
+<canvas id="canvas" width="0" height="0"></canvas>
+
+</body>
 <script type=module>
     //端末がカメラが対応している
     const suppoet='mediaDevices' in navigator;
@@ -11,13 +26,11 @@
       const canvas = document.getElementById('canvas');
       const context = canvas.getContext('2d');
       const captureButton = document.getElementById('capture');
-      const constraints = {
-      video: true,
-    };
+      const constraints = {video: true,};
     //contextが写真
-    captureButton.addEventListener('click', () => {
+    /*captureButton.addEventListener('click', () => {
     context.drawImage(player, 50, 0, 200, 200);
-    });
+    });*/
     navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
       player.srcObject = stream;

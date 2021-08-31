@@ -26,4 +26,20 @@ img {
     height: 120px;           /* 高さ */
     font-size: 1em;          /* 文字サイズ */
     line-height: 1.2;        /* 行の高さ */
+   }
+div {
+    text-align: center;
 }
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+

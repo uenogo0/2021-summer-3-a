@@ -1,12 +1,18 @@
 html {
       font-size: 100%;
 }
+body{
+    background-color: aquamarine;
+
+}
 .follow {
     display: flex;
     font-size: 1.25rem;
     text-transform: uppercase;
     margin-top: 34px;
     list-style: none;
+    text-align: center;
+
 }
 .follow li {
     margin-left: 36px;
@@ -16,4 +22,11 @@ html {
 }
 .follow a:hover {
     color: #0bd;
+}
+section {
+     text-align: center;
+     background: #0bd;
+  color: #fff;
+  margin: 10px;
+  padding: 10px;
 }

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ja">
 <head>
    <meta charset="utf-8">
@@ -5,19 +6,35 @@
    <title>投稿しよう</title>
    <link rel="stylesheet" href="style.css">
 </head>
-
 <body style="text-align:center">
+  <dialog>
+    <p　class="sc_chr">この内容で投稿してよろしいですか？</p>
+    <button id="close">いいえ</button>
+  </dialog>
+  
 <video id="player" autoplay></video><br>
 <form action="#" method="post">
-	<textarea name="comment" cols="100" rows="5" placeholder="コメントを付けてみよう"></textarea></p>
+	<textarea name="comment" cols="100" rows="5" placeholder="コメントを付けて投稿してみよう"></textarea></p>
 </form>
 <br><br><br><br><br><br><br><br>
 <button id="capture"><img src="cicon.png" alt="送信" /></button>
 
-<canvas id="canvas" width="0" height="0"></canvas>
+<canvas id="canvas" width="1000" height="1000"></canvas>
+<h1><a href=index.html>戻る</a></h1>
 
 </body>
+
 <script type=module>
+  //ダイアログ用
+var dialog = document.querySelector('dialog');
+var btn_show = document.getElementById('capture');
+var btn_close = document.getElementById('close');
+btn_show.addEventListener('click', function() {
+  dialog.showModal();
+}, false);
+btn_close.addEventListener('click', function() {
+  dialog.close();
+}, false);
     //端末にカメラが対応している
     const suppoet='mediaDevices' in navigator;
 
@@ -27,10 +44,9 @@
       const context = canvas.getContext('2d');
       const captureButton = document.getElementById('capture');
       const constraints = {video: true,};
-    //contextが写真
-    /*captureButton.addEventListener('click', () => {
-    context.drawImage(player, 50, 0, 200, 200);
-    });*/
+      captureButton.addEventListener('click', () => {
+      context.drawImage(player, 50, 0, 200, 200);
+    });
     navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
       player.srcObject = stream;
@@ -49,4 +65,5 @@
         xhr.send(request);
     }
     */
+   
 </script>

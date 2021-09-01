@@ -27,7 +27,7 @@ textarea {
     } 
 /*投稿された内容に使われる文字*/
 .sc_chr {
-        font-size:30px;
+        font-size:50px;
         font-weight: bold;
     }
 
@@ -43,4 +43,56 @@ textarea {
         transform: scale(1);
     }
 
+    #button{
+    padding: 0.5em 0.5em;
+    margin: 0em 0;
+    border: double 30px #e71a5f;
+    background: rgb(255, 225, 235);
+    width: 600px;
+    margin: 0 auto 20px;
+}
+#favN {
+        font-size:60px;
+        font-weight: bold;
+        text-align: center;
+    }
+#button.active {
+        background: rgb(255, 38, 110);
+    }
+
+
+/*歩数を表示するタブ*/
+.tab{
+    height: 30px;
+}
+ul.tab{
+    margin:0;
+   }
+   .tab li{
+    border:1px solid #888;
+    border-bottom-color:transparent;
+    list-style:none;
+   display:inline-block;
+   background:#888;
+   color:rgb(255, 255, 255);
+   }
+   .tab li.active{
+    background:rgb(255, 187, 124);
+   color:#000;
+   }
+   .tab_cnt{
+    border:1px solid #888;
+   padding:15px;
+    margin-top:-1px;
+    overflow:hidden;
+    height: 150px;
+    background:rgb(255, 208, 163);
+   }
+   .tab_cnt div{
+    display:none;
+    font-size: 80px;
+   }
+   .tab_cnt div.active{
+    display:block;
+   }
 

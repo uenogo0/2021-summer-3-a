@@ -25,6 +25,10 @@ textarea {
         height: 70px;
         font-size: 30px;
     } 
+.cicon {
+        display: block; 
+        margin: auto;
+    }
 /*投稿された内容に使われる文字*/
 .sc_chr {
         font-size:50px;
@@ -62,6 +66,14 @@ textarea {
 
 
 /*歩数を表示するタブ*/
+.taboya{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    letter-spacing : 6px;                /* 文字間 */     
+    background: #ffe4c6;
+    border-bottom: solid 6px #dec3aa;
+    border-radius: 9px;
+}
 .tab{
     height: 30px;
 }
@@ -86,7 +98,17 @@ ul.tab{
     margin-top:-1px;
     overflow:hidden;
     height: 150px;
-    background:rgb(255, 208, 163);
+    background:rgb(255, 255, 255);
+    color          : #ffefc3;            
+    text-shadow    : 
+    3px  3px 1px #000000,
+    -3px  3px 1px #000000,
+     3px -3px 1px #000000,
+    -3px -3px 1px #000000,
+     3px  0px 1px #000000,
+     0px  3px 1px #000000,
+    -3px  0px 1px #000000,
+     0px -3px 1px #000000;
    }
    .tab_cnt div{
     display:none;
@@ -95,4 +117,13 @@ ul.tab{
    .tab_cnt div.active{
     display:block;
    }
+
+   /*背景*//*
+   body {  
+    background-attachment: fixed;
+    /*background-repeat: no-repeat;
+    background-position:-100% 50%;
+    background-size:cover;
+    background-image:url("walk.png");
+  }*/
 

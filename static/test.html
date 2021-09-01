@@ -1,54 +1,50 @@
 
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title> test</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-</head>
-<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>dialog要素</title>
-<style>
-.mod-p { color: #ccc; }
-.mod-p > a { color: #7e7eed; }
-</style>
+<title>テスト</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-
-<dialog>
-  <p>この内容で投稿してよろしいですか？</p>
-  <button id="close">いいえ</button>
-</dialog>
-<button id="capture">モーダルダイアログを開く</button>
-
-<p class="mod-p">
-The quick brown fox jumps over the lazy dog. <a href="#">The quick brown fox jumps over the lazy dog.</a> The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. 
-</p>
-
-<p class="mod-p">
-The quick brown fox jumps over the lazy dog. <a href="#">The quick brown fox jumps over the lazy dog.</a> The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. 
-</p>
+    <h1><a href=index.html>戻る</a></h1>
+</body>
 
 <script>
-var dialog = document.querySelector('dialog');
-var btn_show = document.getElementById('capture');
-var btn_close = document.getElementById('close');
-btn_show.addEventListener('click', function() {
-  dialog.showModal();
-}, false);
-btn_close.addEventListener('click', function() {
-  dialog.close();
-}, false);
+// 重力加速度のしきい値
+var GRAVITY_MIN = 9.8;
+var GRAVITY_MAX = 12.00;
+// 歩数
+var _step = 0;
+// 現在歩いているかどうか
+var _isStep = false;
+
+function initialize() {
+    // デバイスの加速度センサーの情報を取得します
+    window.addEventListener('devicemotion', onDeviceMotion);
+}
+
+function onDeviceMotion(e) {
+    e.preventDefault();
+    // 重力加速度を取得
+    var ag = e.accelerationIncludingGravity;
+    // 重力加速度ベクトルの大きさを取得
+    var acc = Math.sqrt(ag.x*ag.x + ag.y*ag.y + ag.z*ag.z);
+    // 
+    if (_isStep) {
+        // 歩行中にしきい値よりも低ければ一歩とみなす
+        if (acc < GRAVITY_MIN) {
+            _step++;
+            _isStep = false;
+        }
+    } else {
+        // しきい値よりも大きければ歩いているとみなす
+        if (acc > GRAVITY_MAX) {
+            _isStep = true;
+        }
+    }
+    console.log(_step + "歩");
+}
 </script>
-
-
-</body>
-</html>
-     <h1><a href=index.html>戻る</a></h1>
-</body>
 </html>

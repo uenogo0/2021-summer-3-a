@@ -9,33 +9,35 @@
    <!-- CSS -->
    <link rel="stylesheet" 
     href="https://unpkg.com/ress/dist/ress.min.css">
-   <link rel="stylesheet" 
-    href="style.css">
    <link rel="stylesheet" type="text/css" 
     href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
    <link rel="stylesheet" type="text/css" 
     href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
    <link rel="stylesheet" type="text/css" 
     href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/css/6-1-6.css">
+    <link rel="stylesheet" 
+    href="style.css">
 </head>
 <header class=page-header　wrapper>
-  <h1><a href=index.html>気の利いたサービス名</a></h1>
+  <h1 class="sc_chr"><a href=index.html>気の利いたサービス名</a></h1>
   <h1><a href=test.html#jamp>検証用ページ</a></h1>
   
   </header>
 <body>
 
   <!--歩数カウンター-->
-  <ul class="tab">
-    <li id="tab1">残歩数</li>
-    <li id="tab2" class="active">今日</li>
+  <div class="taboya">
+    <ul class="tab">
+    <li id="tab1"class="active">残歩数</li>
+    <li id="tab2">今日</li>
     <li id="tab3">累計</li>
     </ul>
     <div class="tab_cnt">
     <div id="tab1_cnt" class="active">残りの歩数を表示</div>
-    <div id="tab2_cnt">今日の歩いた歩数を表示</div>
-    <div id="tab3_cnt">今までに歩いた歩数を表示</div>
+    <div id="tab2_cnt">今日の歩数を表示</div>
+    <div id="tab3_cnt">今までの歩数を表示</div>
     </div>
+  </div>
 
   <!--urlは画像の人のに-->
   <h2><a href=profile.html>ユーザプロフィール(名前)</a></h2>
@@ -74,9 +76,9 @@
     target="_blank">https://kenwheeler.github.io/slick/</a></p>
 
     <p>下に引っ張ってカメラを起動</p>
+    <img class="cicon" src="cicon.png" alt=""width="30">
     <div id="sbr"></div>
-    <!--上に引き戻す機能もいる-->
-
+  </body>
     <!--以下JS-->
     <script type=module>
        const div1 = document.getElementById("sbr");
@@ -90,7 +92,7 @@ $(function() {
     $('.slider').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
 	    var i = (currentSlide ? currentSlide : 0) + 1;
 	    $('.slick-num .nowcnt').text(i);
-	    $('.slick-num .allcnt').text(slick.slideCount);
+	    $('.slick-num .allcnt').text(slick.slideCount-1);
       if(i==slick.slideCount){
         ////////////////////////////////////
         //更新の処理を書く場所//歩数も減らす
@@ -195,5 +197,5 @@ jQuery(function(){
      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
      
-</body>
+
 </html>

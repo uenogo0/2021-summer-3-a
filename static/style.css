@@ -31,10 +31,16 @@ textarea {
         font-weight: bold;
     }
 
-
-    .slick-slide {
+/*影*/
+.shadow {
+        filter: drop-shadow(10px 10px 10px rgb(128, 128, 128));
+}
+/*slick*/
+.slick-slide {
         transform: scale(.9);
-      }
-      .slick-current {
+    }
+.slick-current {
         transform: scale(1);
-      }
+    }
+
+

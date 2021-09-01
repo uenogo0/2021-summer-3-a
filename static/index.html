@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="top-PAGE" content="gannbaru">
   <title>トップページ</title>
+  <script 
+  src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
    <!-- CSS -->
    <link rel="stylesheet" 
     href="https://unpkg.com/ress/dist/ress.min.css">
@@ -18,10 +20,10 @@
 </head>
 <header class=page-header　wrapper>
   <h1><a href=index.html>タイトル</a></h1>
+  <h1><a href=test.html#jamp>テスト用</a></h1>
   
   </header>
 <body>
-<!--上にスクロールするとカメラ-->
 
   <!--urlは画像の人のに-->
   <h2><a href=profile.html>ユーザプロフィール(名前)</a></h2>
@@ -29,19 +31,19 @@
   　クリックするとファボれたりプロフィールに飛べるようにもする
     それと、なんかバグるから画像の保存を750*500にしたい-->
   <div class="slider">
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg" alt="">
       <p class="sc_chr">コレはテストです１<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_02.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_02.jpg" alt="">
       <p class="sc_chr">コレはテストです２<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_03.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_03.jpg" alt="">
       <p class="sc_chr">コレはテストです３<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_04.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_04.jpg" alt="">
       <p class="sc_chr">コレはテストです４<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_05.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_05.jpg" alt="">
       <p class="sc_chr">コレはテストです５<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_06.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_06.jpg" alt="">
       <p class="sc_chr">コレはテストです６<p></li>
-    <li><img src="road.png" alt=""></li><!--全然つづりが違う-->
+    <li><img class="shadow" src="road.png" alt=""></li><!--全然つづりが違う-->
       </div>
       <p class="slick-num">
         <span class="inner">
@@ -52,9 +54,19 @@
   <p>使用したライブラリ：<a href="https://kenwheeler.github.io/slick/" 
     target="_blank">https://kenwheeler.github.io/slick/</a></p>
 
+    <p>下に引っ張ってカメラを起動</p>
+    <div id="sbr"></div>
+    <!--上に引き戻す機能もいる-->
+
     <!--以下JS-->
     <script type=module>
-
+       const div1 = document.getElementById("sbr");
+    for(let i=0;i<=5;i++){
+      div1.insertAdjacentHTML( 'beforeend', "<br><br><br><br><br><br>");
+    }
+$(function() {
+  $('li').hide().fadeIn('slow');
+});
     //スライドの設定
     $('.slider').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
 	    var i = (currentSlide ? currentSlide : 0) + 1;
@@ -94,13 +106,26 @@
   ]*/
   });
     </script>
+    <script >
+      //スクロールをしてページ遷移
+      $(window).bind("scroll", function() {
+        scrollHeight = $(document).height();
+        scrollPosition = $(window).height() + $(window).scrollTop();
+        if ( (scrollHeight - scrollPosition) / scrollHeight <= .05) {
+          window.location.href = 'kamera.html'; 
+        } else {
+              
+        }
+      });
+      </script>
     <!--jquery-->
+
     <script type="text/javascript" 
      src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!--slick-->
     <script type="text/javascript" 
      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-     <h1><a href=test.html>テスト用</a></h1>
+     
 </body>
 </html>

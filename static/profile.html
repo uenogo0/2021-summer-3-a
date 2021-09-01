@@ -20,10 +20,10 @@
     <article class="sute">
         <ul class=follow>
             <li><p>フォロー</p><span id=FF></span></li>
-            <li><p>フォロワー</p>200</li>
-            <li><p>いいねした数</p>500</li>
-            <li><p>いいねされた数</p>1000</li>
-            <li><p>歩数</p>50000</li>
+            <li><p>フォロワー</p><span id=FW></span></li>
+            <li><p>いいねした数</p><span id=LOVE></span></li>
+            <li><p>いいねされた数</p><span id=like></span></li>
+            <li><p>歩数</p><span id=work></li>
         </ul>
     </article>
     <section>
@@ -37,6 +37,7 @@
         console.log(resp)
         const ff = document.getElementById("FF")
         ff.textContent = resp.count
+       
       </script>
 </body>
 </html>

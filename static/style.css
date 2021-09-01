@@ -41,15 +41,14 @@ textarea {
 }
 /*slick*/
 .slick-slide {
-        transform: scale(.9);
+        transform: scale(.88);
     }
 .slick-current {
-        transform: scale(1);
+        transform: scale(.93);
     }
 
     #button{
     padding: 0.5em 0.5em;
-    margin: 0em 0;
     border: double 30px #e71a5f;
     background: rgb(255, 225, 235);
     width: 600px;

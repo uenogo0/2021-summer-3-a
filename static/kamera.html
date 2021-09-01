@@ -7,9 +7,12 @@
    <link rel="stylesheet" href="style.css">
 </head>
 <body style="text-align:center">
+  <audio id="audioElement" src="kasya.mp3"></audio>
+  <audio id="audio2" src="po.mp3"></audio>
   <dialog>
     <p　class="sc_chr">この内容で投稿してよろしいですか？</p>
     <button id="close">いいえ</button>
+    <button id="send">はい</button>
   </dialog>
   
 <video id="player" autoplay></video><br>
@@ -19,7 +22,7 @@
 <br><br><br><br><br><br><br><br>
 <button id="capture"><img src="cicon.png" alt="送信" /></button>
 
-<canvas id="canvas" width="1000" height="1000"></canvas>
+<canvas id="canvas" width="0" height="0"></canvas>
 <h1><a href=index.html>戻る</a></h1>
 
 </body>
@@ -35,6 +38,7 @@ btn_show.addEventListener('click', function() {
 btn_close.addEventListener('click', function() {
   dialog.close();
 }, false);
+
     //端末にカメラが対応している
     const suppoet='mediaDevices' in navigator;
 
@@ -45,6 +49,7 @@ btn_close.addEventListener('click', function() {
       const captureButton = document.getElementById('capture');
       const constraints = {video: true,};
       captureButton.addEventListener('click', () => {
+        //playerが画像
       context.drawImage(player, 50, 0, 200, 200);
     });
     navigator.mediaDevices.getUserMedia(constraints)
@@ -56,6 +61,12 @@ btn_close.addEventListener('click', function() {
     }
     //送信用
     document.getElementById("capture").onclick = function() {
+      document.getElementById("audioElement").play();
+    };
+    document.getElementById("send").onclick = function() {
+      document.getElementById("audio2").play();
+      //サーバー処理
+      window.location.href = 'index.html'; 
     };
     /*
     xhr = new XMLHttpRequest();

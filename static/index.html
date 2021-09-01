@@ -19,11 +19,23 @@
     href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/css/6-1-6.css">
 </head>
 <header class=page-header　wrapper>
-  <h1><a href=index.html>タイトル</a></h1>
-  <h1><a href=test.html#jamp>テスト用</a></h1>
+  <h1><a href=index.html>気の利いたサービス名</a></h1>
+  <h1><a href=test.html#jamp>検証用ページ</a></h1>
   
   </header>
 <body>
+
+  <!--歩数カウンター-->
+  <ul class="tab">
+    <li id="tab1">残歩数</li>
+    <li id="tab2" class="active">今日</li>
+    <li id="tab3">累計</li>
+    </ul>
+    <div class="tab_cnt">
+    <div id="tab1_cnt" class="active">残りの歩数を表示</div>
+    <div id="tab2_cnt">今日の歩いた歩数を表示</div>
+    <div id="tab3_cnt">今までに歩いた歩数を表示</div>
+    </div>
 
   <!--urlは画像の人のに-->
   <h2><a href=profile.html>ユーザプロフィール(名前)</a></h2>
@@ -45,6 +57,13 @@
       <p class="sc_chr">コレはテストです６<p></li>
     <li><img class="shadow" src="road.png" alt=""></li><!--全然つづりが違う-->
       </div>
+
+      <!--ファボ,長押し用ボタン-->
+      <div id="button">
+        <p id="favN">♡0</p>
+        <!--<span class="nowfav"></span> -->
+      </div>
+
       <p class="slick-num">
         <span class="inner">
             <span class="nowcnt"></span> ／ <span class="allcnt"></span>
@@ -67,7 +86,7 @@
 $(function() {
   $('li').hide().fadeIn('slow');
 });
-    //スライドの設定
+    //スライドの設定。現在見ている画像がi
     $('.slider').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
 	    var i = (currentSlide ? currentSlide : 0) + 1;
 	    $('.slick-num .nowcnt').text(i);
@@ -86,7 +105,7 @@ $(function() {
     slidesToScroll: 1,//移動量
     prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
     nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
-    dots: true,//下部ドットナビゲーションの表示
+    dots: false,//下部ドットナビゲーションの表示
     /*
     responsive: [
       {
@@ -105,6 +124,55 @@ $(function() {
     }
   ]*/
   });
+
+  //いいねの処理
+let count = 0;
+let timer;
+const ua = navigator.userAgent.toLowerCase();
+const isSP = /iphone|ipod|ipad|android/.test(ua);
+const b = document.getElementById('button');
+const r = document.getElementById('favN');
+const eventStart = isSP ? 'touchstart' : 'mousedown';
+const eventEnd   = isSP ? 'touchend' : 'mouseup';
+const eventLeave = isSP ? 'touchmove' : 'mouseleave';
+ 
+b.addEventListener(eventStart, e => {
+  e.preventDefault();
+  b.classList.add('active');
+  timer = setInterval(() => {
+    count++;
+    r.textContent = '♡'+count;
+  }, 10);
+})
+ 
+b.addEventListener(eventEnd, e => {
+  e.preventDefault();
+  if (count) {
+    b.classList.remove('active');
+    clearInterval(timer);
+  }
+});
+ 
+b.addEventListener(eventLeave, e => {
+  e.preventDefault();
+  let el;
+  el = isSP ? document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) : b;
+  if (!isSP || el !== b) {
+    b.classList.remove('active');
+    clearInterval(timer);
+  }
+});
+  //歩数計のタブの処理
+jQuery(function(){
+ jQuery('.tab li').on('click',function(){
+   jQuery('.tab li').removeClass("active");
+   jQuery(this).addClass("active");
+   var id=jQuery(this).attr('id');
+   jQuery('.tab_cnt div').removeClass("active");
+   jQuery('#'+id+'_cnt').addClass("active");
+ });
+});
+
     </script>
     <script >
       //スクロールをしてページ遷移

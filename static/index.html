@@ -19,12 +19,18 @@
     href="style.css">
 </head>
 <header class=page-header　wrapper>
-  <h1 class="sc_chr"><img src="walk.png" alt="" width="100"><a href=index.html></a></h1>
-  <h1><a href=test.html#jamp>検証用ページ</a></h1>
-  
+<table>
+  <td><h1 class="sc_chr" ><a href=index.html><img src="walk.png" alt="" width="150"></a></h1></td>
+  <td>&nbsp;</td>
+  <td>
+    <div class="n_chr"><p>おはようございます！</p>
+    <a href=index.html>名前</a>さん
+    </div>
+  </td>
+</table>
   </header>
 <body>
-
+  <audio id="audio2" src="po.mp3"></audio>
   <!--歩数カウンター-->
   <div class="taboya">
     <ul class="tab">
@@ -38,7 +44,7 @@
     <div id="tab3_cnt">今までの歩数を表示</div>
     </div>
   </div>
-
+  <div class="box">
   <!--urlは画像の人のに-->
   <h2><a href=profile.html>ユーザプロフィール(名前)</a></h2>
   <!--スクロールしてるとこ。画像と文字はプレスホルダーなので、後に変更できるようにする
@@ -59,12 +65,17 @@
       <p class="sc_chr">コレはテストです６<p></li>
     <li><img class="shadow" src="road.png" alt=""></li><!--全然つづりが違う-->
       </div>
+      <p id="favN">♡0</p>
+    </div>
 
       <!--ファボ,長押し用ボタン-->
+      <!--本当は中に♡0を入れたかったけど、スマホだと
+      文字と干渉してバグるので外においた-->
+      <!--<span class="nowfav"></span> -->
       <div id="button">
-        <!--<p id="favN">♡0</p>-->
-        <!--<span class="nowfav"></span> -->
       </div>
+      <p class="n_chr">↑いいねボタン</p>
+
 
       <p class="slick-num">
         <span class="inner">
@@ -74,6 +85,7 @@
   <!--ライセンス関係なので消してはいけない-->
   <p>使用したライブラリ：<a href="https://kenwheeler.github.io/slick/" 
     target="_blank">https://kenwheeler.github.io/slick/</a></p>
+  <h1><a href=test.html#jamp>検証用ページ</a></h1>
 
     <p>下に引っ張ってカメラを起動</p>
     <img class="cicon" src="cicon.png" alt=""width="30">
@@ -145,6 +157,7 @@ b.addEventListener(eventStart, e => {
   b.classList.add('active');
   timer = setInterval(() => {
     count++;
+    document.getElementById("audio2").play();
     r.textContent = '♡'+count;
   }, 10);
 })

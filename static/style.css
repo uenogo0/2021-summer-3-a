@@ -29,9 +29,20 @@ textarea {
         display: block; 
         margin: auto;
     }
+.n_chr {
+    text-align: center;
+        font-size:30px;
+    }
+.box{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    border: solid 3px #000000;
+}
 /*投稿された内容に使われる文字*/
 .sc_chr {
-        font-size:50px;
+    text-align: center;
+        font-size:70px;
         font-weight: bold;
     }
 
@@ -58,6 +69,7 @@ textarea {
         font-size:60px;
         font-weight: bold;
         text-align: center;
+        color:rgb(255, 38, 110);
     }
 #button.active {
         background: rgb(255, 38, 110);
@@ -66,6 +78,10 @@ textarea {
 
 /*歩数を表示するタブ*/
 .taboya{
+    /*
+    top: 0;
+    right:0;
+    position: fixed;*/
     padding: 0.5em 1em;
     margin: 2em 0;
     letter-spacing : 6px;                /* 文字間 */     

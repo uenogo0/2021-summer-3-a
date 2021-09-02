@@ -5,10 +5,16 @@ class MyServer extends Server {
         switch (path) {
             case "/api/follow": {
                 const resp = {
-                    count: 1
-                }
+                    count: 1,
+                    FWcount: 2,
+                    LOcount: 3,
+                    LIcount: 4,
+                    WAcount: 5
+                }    
+                
                 console.log("resp = ", resp)
                 return resp
+                
             }
         }
     }

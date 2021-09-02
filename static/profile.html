@@ -23,7 +23,7 @@
             <li><p>フォロワー</p><span id=FW></span></li>
             <li><p>いいねした数</p><span id=LOVE></span></li>
             <li><p>いいねされた数</p><span id=like></span></li>
-            <li><p>歩数</p><span id=work></li>
+            <li><p>歩数</p><span id=walk></li>
         </ul>
     </article>
     <section>
@@ -37,7 +37,15 @@
         console.log(resp)
         const ff = document.getElementById("FF")
         ff.textContent = resp.count
-       
+        const fw = document.getElementById("FW")
+        fw.textContent = resp.FWcount
+        const lo = document.getElementById("LOVE")
+        lo.textContent = resp.LOcount
+        const li = document.getElementById("like")
+        li.textContent = resp.LIcount
+        const wa = document.getElementById("walk")
+        wa.textContent = resp.WAcount
+        
       </script>
 </body>
 </html>

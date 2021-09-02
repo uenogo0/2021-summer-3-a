@@ -27,24 +27,58 @@ section {
   margin: 10px;
   padding: 10px;
 }
-.btn-square {
-    display: inline-block;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    background: #668ad8;/*ボタン色*/
-    color: #FFF;
-    border-bottom: solid 4px #627295;
-    border-radius: 3px;
-    
-  }
-  .btn-square:active {
-    /*ボタンを押したとき*/
-    -webkit-transform: translateY(4px);
-    transform: translateY(4px);/*下に動く*/
-    border-bottom: none;/*線を消す*/
-  }
-  .btn-square {
+/*---------------------------------フォローのボタン ---------------------*/
+.BOX {
+    visibility:hidden;
+}
+  .block {
       position: relative;
       bottom: 45px;
       left: 350px;
-  }
+      width:200px;
+      clear:both;
+      margin:0 0 25px;
+      }
+      label{
+        width:100px;
+        height:50px;
+        box-sizing:border-box;
+        border:3px solid;
+        float:left;
+        border-radius:100px;
+        position:relative;
+        cursor:pointer;
+        transition:.3s ease;
+      }
+      input[type=checkbox]:checked + label{
+        background:#55e868;
+      }
+      input[type=checkbox]:checked + label:before{
+        left:50px;
+      }
+      label:before{
+        transition:.3s ease;
+        content:'';
+        width:40px;
+        height:40px;
+        position:absolute;
+        background:white;
+        left:2px;
+        top:2px;
+        box-sizing:border-box;
+        border:3px solid;
+        color:black;
+        border-radius:100px;
+      } 
+      .BOTAN{
+        text-transform:uppercase;
+        font-family:'Roboto Condensed', sans-
+      serif;
+        font-weight:bold;
+        letter-spacing:1px;
+        font-size:20px;
+        float:right;
+        width:85px;
+        margin:16px 0 0;
+      }
+  

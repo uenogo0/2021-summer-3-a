@@ -9,7 +9,8 @@ class MyServer extends Server {
                     FWcount: 2,
                     LOcount: 3,
                     LIcount: 4,
-                    WAcount: 5
+                    WAcount: 5,
+                    AWcount: 6,
                 }    
                 
                 console.log("resp = ", resp)

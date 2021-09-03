@@ -1,22 +1,14 @@
 import { Server } from "https://js.sabae.cc/Server.js";
-import {
-    Insert_posts,Search_posts,Update_favorite,Delete_posts
-}from "./posts.ts";
-import {
-    Insert_users,Search_users,Delete_users
-}from "./users.ts";
 class MyServer extends Server {
   api(path, req) {
 
 
     switch (path) {
         case "/data/": {
-            Insert_posts(1," ",req.data);
             return {
               }
         }
         case "/api/send": {
-            Update_favorite(1,req.data);
             return {
                 msg: req.data + "を受け取りました"
               }
@@ -37,7 +29,13 @@ class MyServer extends Server {
         }
         break;
 
-        //写真
+        //現在見ている写真
+        case "/api/lookNOW": {
+            return {
+              }
+        }
+        break;
+        //写真のコメント
         case "/api/cameraC": {
             //req.data
             return {
@@ -47,10 +45,9 @@ class MyServer extends Server {
         break;
         //タイムライン
         case "/api/timeline": {
-            Search_posts(1,f:string)
             const resp = {
-                img0: process.argv[5],
-                img1: process.argv[5],
+                img0: "toriaezu.png",
+                img1: "toriaezu.png",
                 img2: "toriaezu.png",
                 img3: "toriaezu.png",
                 img4: "toriaezu.png",

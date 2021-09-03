@@ -46,7 +46,27 @@ class MyServer extends Server {
                 img4: "toriaezu.png",
                 img5: "toriaezu.png",
                 img6 : "road.png",
-                essay: "テスト",
+                img7 : "road.png",
+                img8: "toriaezu.png",
+                img9: "toriaezu.png",
+                essay1: "テスト",
+                essay2: "テスト",
+                essay3: "テスト",
+                essay4: "テスト",
+                essay5: "テスト",
+                essay6: "テスト",
+                essay7: "テスト",
+                essay8: "テスト",
+                essay9: "テスト",
+                fav1:4,
+                fav2:10,
+                fav3:17,
+                fav4:3,
+                fav5:1000,
+                fav6:2300,
+                fav7:6789,
+                fav8:100,
+                fav9:1008,
             }    
             return resp
         }
@@ -60,16 +80,15 @@ class MyServer extends Server {
                 LIcount: 4,
                 WAcount: 5,
                 AWcount: 6,
-            }    
+            }   
             
             console.log("resp = ", resp)
             return resp
             
         }
         break; 
-
     }
   }
 }
-new MyServer(8001);
+new MyServer(8890);
 

@@ -75,7 +75,7 @@ btn_close.addEventListener('click', function() {
       var img01 = new Image();
       img01.src = "./toriaezu.png";
       const up = new ImageUploader("/data/")
-      up.setFile(f, 1200, 1024 * 1024)
+      up.setFile(, 1200, 1024 * 1024)
       up.onload = async url => {
       alert(url)
       }

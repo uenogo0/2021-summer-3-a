@@ -100,6 +100,7 @@
     <!------------------以下JS--------------------------------------------------------------->
 
     <script >
+      var flg=0;
       //スクロールをしてページ遷移
       $(window).bind("scroll", function() {
         scrollHeight = $(document).height();
@@ -190,9 +191,12 @@ function timestamp2datetime( ts ){
 timer = setInterval('clock()',1000); 
 function clock() {
   var use_point=localStorage.getItem("use_point");
+  flg=use_point;
+  if(all-flg>=-1){
 	document.getElementById('tab1_cnt').innerHTML = all-use_point+1 ;
   document.getElementById('tab2_cnt').innerHTML = alld ;
   document.getElementById('tab3_cnt').innerHTML = all+1 ;
+  }
 }
 
 //////////////ここまで歩数取得の処理/////////////////
@@ -204,12 +208,14 @@ function clock() {
       const respd = await fetchJSON("/api/timeline", {});
       let img = [respd.img0, respd.img1]
       var new_element= document.createElement("li");
-      new_element.innerHTML='<img class="shadow" src="'+img[0]+'"alt=""><p class="sc_chr">'+respd.essay+'<p></li>';
+      //new_element.innerHTML='<p class="sc_chr">asdf<p>';
+      new_element.innerHTML='<img class="shadow" src="'+img[0]+'"alt=""><p class="sc_chr">'+respd.essay+'<p>';
       document.getElementById("time_line").appendChild(new_element);
       for(let i=0; i<=3; i++){
-        new_element.innerHTML='<img class="shadow" src="'+img[i]+'"alt=""><p class="sc_chr">'+respd.essay+'<p></li>';
-      document.getElementById("time_line").appendChild(new_element);
+        
       }
+      new_element.innerHTML='<img class="shadow" src="'+"road.png"+'"alt=""><p class="sc_chr">'+""+'<p>';
+      document.getElementById("time_line").appendChild(new_element);
         //ローカルストレージ
         var use_point = localStorage.getItem("use_point");
         if (use_point){
@@ -236,9 +242,6 @@ $(function() {
 	    $('.slick-num .nowcnt').text(i);
 	    $('.slick-num .allcnt').text(slick.slideCount-1);
       if(i==slick.slideCount){
-        ////////////////////////////////////
-        //更新の処理を書く場所//歩数も減らす
-        /////////////////////////////////
     if(all>=use_point){
         use_point=Number(localStorage.getItem("use_point"));
         use_point+=500;
@@ -293,18 +296,23 @@ b.addEventListener(eventStart, e => {
   b.classList.add('active');
   timer = setInterval(() => {
     use_point=localStorage.getItem("use_point");
-    if(all>=use_point){
+    if(all-use_point>=0){
     fav++;
     document.getElementById("audio2").play();
     //deta
     r.textContent = '♡'+fav;
     use_point++;
     localStorage.setItem("use_point", use_point);
-    }
+    }else{
+    b.classList.remove('active');
+    clearInterval(timer);
+  }
   }, 10);
 })
  
 b.addEventListener(eventEnd,async e => {
+  use_point=localStorage.getItem("use_point");
+    if(all-use_point>=0){
   e.preventDefault();
   if (fav) {
     b.classList.remove('active');
@@ -313,14 +321,24 @@ b.addEventListener(eventEnd,async e => {
       data: fav
     })
     Pfav=0;
+  }else{
+    b.classList.remove('active');
+    clearInterval(timer);
   }
+}
 });
 
 b.addEventListener(eventLeave, e => {
-  e.preventDefault();
+  use_point=localStorage.getItem("use_point");
+    if(all-use_point>=0){
+
   let el;
   el = isSP ? document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) : b;
   if (!isSP || el !== b) {
+    b.classList.remove('active');
+    clearInterval(timer);
+  }
+}else {
     b.classList.remove('active');
     clearInterval(timer);
   }

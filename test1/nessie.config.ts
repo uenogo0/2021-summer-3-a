@@ -21,6 +21,8 @@ const client = new ClientMySQL({
     db: "deno-dev",
 });
 
+//export default client;
+
 // const client = new ClientSQLite("./sqlite.db");
 
 /** This is the final config object */

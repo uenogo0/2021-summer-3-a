@@ -1,125 +1,86 @@
- <!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Denoでチャットアプリ</title>
-  </head>
-  <body>
-    <div>
-      <input type="text" id="input" />
-      <button id="sendButton" disabled>送信</button>
-      <button id="enterButton" disabled>入室</button>
-      <button id="leaveButton" disabled>退室</button>
-    </div>
-    <ul id="timeline"></ul>
-    <script>
-      let ws;
-      let isConnected = false;
-      const input = document.getElementById("input");
-      const sendButton = document.getElementById("sendButton");
-      const enterButton = document.getElementById("enterButton");
-      const leaveButton =document.getElementById("leaveButton");
-      const timeline = document.getElementById("timeline");
-      input.addEventListener("keydown", sendMessageByEnterKey);
-      sendButton.onclick = sendMessage;
-      enterButton.onclick = connectWebSocket;
-      leaveButton.onclick = leaveRoom;
-      applyButtonState();
-      connectWebSocket();
-      function connectWebSocket() {
-        if (ws) ws.close();
-        ws = new WebSocket(`ws://${location.host}/ws`);
-        ws.addEventListener("open", () => {
-          isConnected = true;
-          applyButtonState();
-        });
-        ws.addEventListener("message", ({data}) => {
-          timeline.appendChild(messageDom(data));
-        });
-        ws.addEventListener("close", () => {
-          isConnected = false;
-          applyButtonState();
-        });
-      }
-      function sendMessageByEnterKey(e) {
-        if (e.keyCode === 13) sendMessage();
-      }
-      function sendMessage() {
-        const msg = input.value;
-        ws.send(msg);
-        input.value = "";
-      }
-      function messageDom(msg) {
-        const li = document.createElement("li");
-        li.className = "message";
-        li.innerText = msg;
-        return li;
-      }
-      function leaveRoom() {
-        ws.close();
-        isConnected = false;
-        applyButtonState();
-      }
-      function applyButtonState() {
-        sendButton.disabled = isConnected ? false : true;
-        enterButton.disabled = isConnected ? true : false;
-        leaveButton.disabled = isConnected ? false : true;
-      }
-    </script>
-  </body>
-</html> 
-
-
-
-
-
-
-<!--
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="top-PAGE" content="gannbaru">
   <title>トップページ</title>
+  <script 
+  src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
    <!-- CSS -->
    <link rel="stylesheet" 
     href="https://unpkg.com/ress/dist/ress.min.css">
-   <link rel="stylesheet" 
-    href="style.css">
    <link rel="stylesheet" type="text/css" 
     href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
    <link rel="stylesheet" type="text/css" 
     href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
    <link rel="stylesheet" type="text/css" 
     href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/css/6-1-6.css">
+    <link rel="stylesheet" 
+    href="style.css">
 </head>
 <header class=page-header　wrapper>
-  <h1><a href=index.html>タイトル</a></h1>
-  
+<table>
+  <td><h1 class="sc_chr" ><a href=index.html><img src="walk.png" alt="" width="150"></a></h1></td>
+  <td>&nbsp;</td>
+  <td>
+    <div class="n_chr"><p>おはようございます！</p>
+    <a href=index.html>名前</a>さん
+    </div>
+  </td>
+  <td>&nbsp;</td>
+  <td>
+    <div class="n_chr"></div><p>このアプリを使用するにはgoogle fitのインストールが必要です</p>
+    </div>
+  </td>
+</table>
   </header>
 <body>
-<!--上にスクロールするとカメラ-->
-
+  <audio id="audio2" src="po.mp3"></audio>
+  <!--歩数カウンター-->
+  <div class="taboya">
+    <ul class="tab">
+    <li id="tab1"class="active">残歩数</li>
+    <li id="tab2">今日</li>
+    <li id="tab3">累計</li>
+    </ul>
+    <div class="tab_cnt">
+    <div id="tab1_cnt" class="active"></div>
+    <div id="tab2_cnt"></div>
+    <div id="tab3_cnt"></div>
+    </div>
+  </div>
+  <div class="box">
   <!--urlは画像の人のに-->
   <h2><a href=profile.html>ユーザプロフィール(名前)</a></h2>
   <!--スクロールしてるとこ。画像と文字はプレスホルダーなので、後に変更できるようにする
   　クリックするとファボれたりプロフィールに飛べるようにもする
-    それと、なんかバグるから画像の保存を750*500にしたい-->
-  <div class="slider">
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg" alt="">
+    それと、なんかバグるから750*500に設定-->
+    
+  <div class="slider"id="time_line">
+    
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg" alt="">
       <p class="sc_chr">コレはテストです１<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_02.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_02.jpg" alt="">
       <p class="sc_chr">コレはテストです２<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_03.jpg" alt="">
+    <!--<li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_03.jpg" alt="">
       <p class="sc_chr">コレはテストです３<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_04.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_04.jpg" alt="">
       <p class="sc_chr">コレはテストです４<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_05.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_05.jpg" alt="">
       <p class="sc_chr">コレはテストです５<p></li>
-    <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_06.jpg" alt="">
+    <li><img class="shadow" src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_06.jpg" alt="">
       <p class="sc_chr">コレはテストです６<p></li>
-    <li><img src="road.png" alt=""></li><!--全然つづりが違う-->
+    <li><img class="shadow" src="road.png" alt=""></li>\全然つづりが違う\-->
       </div>
+      <p id="favN">♡0</p>
+    </div>
+      <!--本当は中に♡0を入れたかったけど、スマホだと
+      文字と干渉してバグるので外においた-->
+      <div id="button">
+      </div>
+      <p class="n_chr">↑いいねボタン</p>
+
+
       <p class="slick-num">
         <span class="inner">
             <span class="nowcnt"></span> ／ <span class="allcnt"></span>
@@ -128,27 +89,171 @@
   <!--ライセンス関係なので消してはいけない-->
   <p>使用したライブラリ：<a href="https://kenwheeler.github.io/slick/" 
     target="_blank">https://kenwheeler.github.io/slick/</a></p>
+  <h1><a href=test.html>検証用ページ1</a></h1>
+  <h1><a href=test2.html>検証用ページ2</a></h1>
+  <h1><a href=test3.html>検証用ページ3</a></h1>
 
-    <!--以下JS-->
+    <p>下に引っ張ってカメラを起動</p>
+    <img class="cicon" src="cicon.png" alt=""width="30">
+    <div id="sbr"></div>
+  </body>
+    <!------------------以下JS--------------------------------------------------------------->
+
+    <script >
+      //スクロールをしてページ遷移
+      $(window).bind("scroll", function() {
+        scrollHeight = $(document).height();
+        scrollPosition = $(window).height() + $(window).scrollTop();
+        if ( (scrollHeight - scrollPosition) / scrollHeight <= .05) {
+          window.location.href = 'kamera.html'; 
+        } else {
+              
+        }
+      });
+      /////ここから歩数取得の処理（よく分かってないから多分冗長)////////
+      const client_id = '257557913365-laane8a72mfmku213mnhmgmh4jm4ur11.apps.googleusercontent.com';
+const scope = ['https://www.googleapis.com/auth/fitness.activity.read'];
+let access_token = '';
+function getToken() {
+    gapi.auth.authorize({client_id: client_id, scope: scope, immediate: false, response_type: 'token'}, mycallback);
+}
+
+function mycallback(e) {
+    access_token = e.access_token;
+    fetch('https://www.googleapis.com/fitness/v1/users/me/dataSources?access_token=' + access_token)
+        .then(response => {
+            return response.json();
+        })
+        .then(json => {
+            getSteps( json.dataSource );
+        })
+}
+var all=0;
+var alld=0;
+function getSteps( dataSources ) {
+
+    var now = new Date();
+    var Year = now.getFullYear();
+    var Month = now.getMonth()+1;
+    var Dat = now.getDate();
+    var time0=Year+"/"+Month+"/"+Dat+" 0:00:00";
+    const start = new Date('2000/1/1 0:00:00').getTime();
+    const dayM = new Date(time0).getTime();
+    const end = Date.now();
+
+    dataSources.forEach( function( dataSource ){
+      var id = dataSource.dataStreamId;
+
+      fetch('https://www.googleapis.com/fitness/v1/users/me/dataSources/' + id + '/datasets/'+start.toString()+'000000'+'-'+end.toString()+'000000?access_token=' + access_token)
+          .then(response => {
+              return response.json();
+          })
+          .then(json => {
+              var points = json.point;
+              if(id=="derived:com.google.step_count.delta:com.google.android.gms:merge_step_deltas"){
+                for( var i = 0; i < points.length; i ++ ){
+                var point = points[i];
+                var ts = parseInt( point.modifiedTimeMillis );
+                var datetime = timestamp2datetime( ts );
+                const deltaT = new Date(datetime).getTime();
+                all+=point.value[0].intVal;
+                if(deltaT>dayM)alld+=point.value[0].intVal;
+              }
+              }
+          });
+    });
+
+}
+
+      //コレが怪しいと睨んでいる
+window.onload = getToken;
+
+function timestamp2datetime( ts ){
+  var dt = new Date( ts );
+  var y = dt.getFullYear();
+  var m = dt.getMonth() + 1;
+  var d = dt.getDate();
+  var h = dt.getHours();
+  var n = dt.getMinutes();
+  var s = dt.getSeconds();
+
+  var datetime = y
+    + '/' + ( m < 10 ? '0' : '' ) + m
+    + '/' + ( d < 10 ? '0' : '' ) + d
+    + ' ' + ( h < 10 ? '0' : '' ) + h
+    + ':' + ( n < 10 ? '0' : '' ) + n
+    + ':' + ( s < 10 ? '0' : '' ) + s;
+  return datetime;
+}
+
+//表示
+timer = setInterval('clock()',1000); 
+function clock() {
+  var use_point=localStorage.getItem("use_point");
+	document.getElementById('tab1_cnt').innerHTML = all-use_point+1 ;
+  document.getElementById('tab2_cnt').innerHTML = alld ;
+  document.getElementById('tab3_cnt').innerHTML = all+1 ;
+}
+
+//////////////ここまで歩数取得の処理/////////////////
+      </script>
     <script type=module>
+        import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js"
 
-    //スライドの設定
+      //タイムライン
+      const respd = await fetchJSON("/api/timeline", {});
+      let img = [respd.img0, respd.img1]
+      var new_element= document.createElement("li");
+      new_element.innerHTML='<img class="shadow" src="'+img[0]+'"alt=""><p class="sc_chr">'+respd.essay+'<p></li>';
+      document.getElementById("time_line").appendChild(new_element);
+      for(let i=0; i<=3; i++){
+        new_element.innerHTML='<img class="shadow" src="'+img[i]+'"alt=""><p class="sc_chr">'+respd.essay+'<p></li>';
+      document.getElementById("time_line").appendChild(new_element);
+      }
+        //ローカルストレージ
+        var use_point = localStorage.getItem("use_point");
+        if (use_point){
+          use_point = JSON.parse( use_point );
+        if ( use_point.value ){
+          use_point=localStorage.getItem("use_point");
+        } else {
+			    //localStorage.setItem("use_point", 0);
+        }
+        } else {
+			    localStorage.setItem("use_point", 0);
+        }
+
+       const div1 = document.getElementById("sbr");
+    for(let i=0;i<=5;i++){
+      div1.insertAdjacentHTML( 'beforeend', "<br><br><br><br><br><br>");
+    }
+$(function() {
+  $('li').hide().fadeIn('slow');
+});
+    //スライドの設定。現在見ている画像がi
     $('.slider').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
 	    var i = (currentSlide ? currentSlide : 0) + 1;
 	    $('.slick-num .nowcnt').text(i);
-	    $('.slick-num .allcnt').text(slick.slideCount);
+	    $('.slick-num .allcnt').text(slick.slideCount-1);
       if(i==slick.slideCount){
         ////////////////////////////////////
         //更新の処理を書く場所//歩数も減らす
         /////////////////////////////////
+    if(all>=use_point){
+        use_point=Number(localStorage.getItem("use_point"));
+        use_point+=500;
+        localStorage.setItem("use_point", use_point);
         window.location.href = 'index.html'; 
+        }
       }
     });
     $('.slider').slick({
+    centerMode: true,
     autoplay: false,//自動的に動き出すか。
     infinite: false,//スライドをループさせるかどうか。
-    slidesToShow: 1.1,//スライドを画面に見せる枚数
+    slidesToShow: 1,//スライドを画面に見せる枚数
     slidesToScroll: 1,//移動量
+    variableWidth: true,
     prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
     nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
     dots: true,//下部ドットナビゲーションの表示
@@ -170,14 +275,78 @@
     }
   ]*/
   });
+
+  //いいねの処理
+var fav = 0;
+var Pfav=0;
+let timer;
+const ua = navigator.userAgent.toLowerCase();
+const isSP = /iphone|ipod|ipad|android/.test(ua);
+const b = document.getElementById('button');
+const r = document.getElementById('favN');
+const eventStart = isSP ? 'touchstart' : 'mousedown';
+const eventEnd   = isSP ? 'touchend' : 'mouseup';
+const eventLeave = isSP ? 'touchmove' : 'mouseleave';
+ 
+b.addEventListener(eventStart, e => {
+  e.preventDefault();
+  b.classList.add('active');
+  timer = setInterval(() => {
+    use_point=localStorage.getItem("use_point");
+    if(all>=use_point){
+    fav++;
+    document.getElementById("audio2").play();
+    //deta
+    r.textContent = '♡'+fav;
+    use_point++;
+    localStorage.setItem("use_point", use_point);
+    }
+  }, 10);
+})
+ 
+b.addEventListener(eventEnd,async e => {
+  e.preventDefault();
+  if (fav) {
+    b.classList.remove('active');
+    clearInterval(timer);
+    const rest = await fetchJSON("/api/fav", {
+      data: fav
+    })
+    Pfav=0;
+  }
+});
+
+b.addEventListener(eventLeave, e => {
+  e.preventDefault();
+  let el;
+  el = isSP ? document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) : b;
+  if (!isSP || el !== b) {
+    b.classList.remove('active');
+    clearInterval(timer);
+  }
+});
+  //歩数計のタブの処理
+jQuery(function(){
+ jQuery('.tab li').on('click',function(){
+   jQuery('.tab li').removeClass("active");
+   jQuery(this).addClass("active");
+   var id=jQuery(this).attr('id');
+   jQuery('.tab_cnt div').removeClass("active");
+   jQuery('#'+id+'_cnt').addClass("active");
+ });
+});
+
     </script>
+
+      <script src="https://apis.google.com/js/client.js"></script>
     <!--jquery-->
+
     <script type="text/javascript" 
      src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!--slick-->
     <script type="text/javascript" 
      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-     <h1><a href=test.html>テスト用</a></h1>
-</body>
-</html>-->
+     
+
+</html>

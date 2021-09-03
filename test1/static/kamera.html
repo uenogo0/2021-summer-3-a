@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+   <meta charset="utf-8">
+   <meta name="top-PAGE" content="gannbaru">
+   <title>投稿しよう</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body style="text-align:center">
+  
+  <audio id="audioElement" src="kasya.mp3"></audio>
+  <audio id="audio2" src="po.mp3"></audio>
+  <dialog>
+    <p　class="sc_chr">この内容で投稿してよろしいですか？</p>
+    <button id="close">いいえ</button>
+    <button id="send">はい</button>
+  </dialog>
+  
+<video id="player" autoplay></video><br>
+<textarea id="a" name="comment" cols="100" rows="5" placeholder="コメントを付けて投稿してみよう"></textarea>
+<br><br><br><br><br><br><br><br>
+<button id="capture"><img src="cicon.png" alt="送信" /></button>
+<button type="button" id="ch">
+  切り替え
+</button>
+
+<canvas id="canvas" width="200" height="100"></canvas>
+<h1><a href=index.html>戻る</a></h1>
+
+</body>
+
+<script type=module>
+import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js"
+import { ImageUploader } from "https://code4sabae.github.io/js/ImageUploader.js"
+  //ダイアログ用
+var player;
+var context;
+var dialog = document.querySelector('dialog');
+var btn_show = document.getElementById('capture');
+var btn_close = document.getElementById('close');
+btn_show.addEventListener('click', function() {
+  dialog.showModal();
+}, false);
+btn_close.addEventListener('click', function() {
+  player.play();
+  dialog.close();
+}, false);
+
+    //端末にカメラが対応している
+    const suppoet='mediaDevices' in navigator;
+
+    if(suppoet){
+      player = document.getElementById('player');
+      const canvas = document.getElementById('canvas');
+      context = canvas.getContext('2d');
+      const captureButton = document.getElementById('capture');
+      const constraints = {video: true,};
+      captureButton.addEventListener('click', () => {
+        //playerが画像
+    });
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then((stream) => {
+      player.srcObject = stream;
+    });
+    }else{
+        alert("非対応");
+    }
+    //送信用
+    document.getElementById("capture").onclick = function() {
+      player.pause();
+      document.getElementById("audioElement").play();
+    };
+    document.getElementById("send").onclick =async function() {
+      document.getElementById("audio2").play();
+      var img01 = new Image();
+      img01.src = "./toriaezu.png";
+      const up = new ImageUploader("/data/")
+      up.setFile(f, 1200, 1024 * 1024)
+      up.onload = async url => {
+      alert(url)
+      }
+      //サーバー処理
+      const res = await fetchJSON("/api/cameraC", {
+      data: document.getElementById("a").value
+    })
+
+      //window.location.href = 'index.html'; 
+    };
+   
+</script>
+</html>

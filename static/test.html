@@ -8,71 +8,61 @@
 const client_id = '257557913365-laane8a72mfmku213mnhmgmh4jm4ur11.apps.googleusercontent.com';
 const scope = ['https://www.googleapis.com/auth/fitness.activity.read'];
 let access_token = '';
-
 function getToken() {
-    //gapi.auth.authorize({client_id: client_id, scope: scope, immediate: true, response_type: 'token'}, mycallback);
     gapi.auth.authorize({client_id: client_id, scope: scope, immediate: false, response_type: 'token'}, mycallback);
 }
 
 function mycallback(e) {
     access_token = e.access_token;
-    //alert( 'access_token = ' + access_token );
-    //console.log(e);
     fetch('https://www.googleapis.com/fitness/v1/users/me/dataSources?access_token=' + access_token)
         .then(response => {
             return response.json();
         })
         .then(json => {
-            //console.log(json);
             getSteps( json.dataSource );
         })
 }
 function getSteps( dataSources ) {
-    const start = new Date('2019/3/1 0:00:00').getTime();
+
+    var all=0;
+    var alld=0;
+
+    var now = new Date();
+    var Year = now.getFullYear();
+    var Month = now.getMonth()+1;
+    var Dat = now.getDate();
+    var time0=Year+"/"+Month+"/"+Dat+" 0:00:00";
+    const start = new Date('2000/1/1 0:00:00').getTime();
+    const dayM = new Date(time0).getTime();
     const end = Date.now();
-    console.log(new Date(start));
-    console.log(new Date(end));
 
     dataSources.forEach( function( dataSource ){
       var id = dataSource.dataStreamId;
-      var _id = id.split( ":" ).join( '_' ).split( '<' ).join( '_' ).split( '.' ).join( '_' );
-      var div = '<div><a href="javascript:void(0)" id="category_' + _id + '" onClick="show(\'' + _id + '\');">' + id + '</a>'
-        + '<div id="layer_' + _id + '" style="display:none; position: relative; margin-left:15pt;" class="close"></div></div>';
-      $('body').append( div );
 
       fetch('https://www.googleapis.com/fitness/v1/users/me/dataSources/' + id + '/datasets/'+start.toString()+'000000'+'-'+end.toString()+'000000?access_token=' + access_token)
           .then(response => {
               return response.json();
           })
           .then(json => {
-              //console.log(json);
-              var content = '';
               var points = json.point;
-              var _id = json.dataSourceId.split( ":" ).join( '_' ).split( '<' ).join( '_' ).split( '.' ).join( '_' );
-              for( var i = 0; i < points.length; i ++ ){
+              if(id=="derived:com.google.step_count.delta:com.google.android.gms:merge_step_deltas"){
+                for( var i = 0; i < points.length; i ++ ){
                 var point = points[i];
                 var ts = parseInt( point.modifiedTimeMillis );
                 var datetime = timestamp2datetime( ts );
-                content += '[' + i + '] ' + datetime + ' : ' + point.value[0].intVal + '<br/>';
+                const deltaT = new Date(datetime).getTime();
+                all+=point.value[0].intVal;
+                if(deltaT>dayM)alld+=point.value[0].intVal;
               }
-              $('#layer_'+_id).append( content );
+              alert(all);
+              alert(alld)
+              }
           });
     });
 
 }
+//コレが怪しいと睨んでいる
 window.onload = getToken;
-
-function show( id ){
-  var objID = document.getElementById( "layer_" + id );
-  var buttonID = document.getElementById( "category_" + id );
-  if( objID.className == 'close' ){
-    objID.style.display = 'block';
-    objID.className = 'open';
-  }else{
-    objID.style.display = 'none';
-    objID.className = 'close';
-  }
-}
 
 function timestamp2datetime( ts ){
   var dt = new Date( ts );

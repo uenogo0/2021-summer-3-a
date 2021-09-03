@@ -1,5 +1,4 @@
 import { Server } from "https://js.sabae.cc/Server.js";
-
 class MyServer extends Server {
   api(path, req) {
 
@@ -73,3 +72,4 @@ class MyServer extends Server {
   }
 }
 new MyServer(8001);
+

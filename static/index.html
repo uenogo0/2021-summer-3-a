@@ -188,7 +188,7 @@ function timestamp2datetime( ts ){
 }
 
 //表示
-timer = setInterval('clock()',1000); 
+timer = setInterval('clock()',100); 
 function clock() {
   var use_point=localStorage.getItem("use_point");
   flg=use_point;
@@ -237,12 +237,29 @@ $(function() {
   $('li').hide().fadeIn('slow');
 });
     //スライドの設定。現在見ている画像がi
-    var now;
-    $('.slider').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+    
+var fav = 0;
+var respG;
+    var nowi;
+    $('.slider').on('init reInit afterChange',async function (event, slick, currentSlide, nextSlide) {
 	    var i = (currentSlide ? currentSlide : 0) + 1;
-      now=i;
+      nowi=i;
 	    $('.slick-num .nowcnt').text(i);
 	    $('.slick-num .allcnt').text(slick.slideCount-1);
+      respG = await fetchJSON("/api/timeline", {});
+    //alert(respG.fav1);
+    switch (nowi) {
+      case 1:fav=respG.fav1; break;
+      case 2:fav=respG.fav2; break;
+      case 3:fav=respG.fav3; break;
+      case 4:fav=respG.fav4; break;
+      case 5:fav=respG.fav5; break;
+      case 6:fav=respG.fav6; break;
+      case 7:fav=respG.fav7; break;
+      case 8:fav=respG.fav8; break;
+      case 9:fav=respG.fav9; break;
+    }
+    r.textContent = '♡'+fav;
       if(i==slick.slideCount){
     if(all>=use_point){
         use_point=Number(localStorage.getItem("use_point"));
@@ -261,28 +278,10 @@ $(function() {
     variableWidth: true,
     prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
     nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
-    dots: true,//下部ドットナビゲーションの表示
-    /*
-    responsive: [
-      {
-      breakpoint: 769,//モニターの横幅
-      settings: {
-        slidesToShow: 1,//スライドを画面に見せる枚数
-        slidesToScroll: 1,//移動量
-      }
-    },
-    {
-      breakpoint: 426,//モニターの横幅
-      settings: {
-        slidesToShow: 1,//スライドを画面に見せる枚数
-        slidesToScroll: 1,//移動量
-      }
-    }
-  ]*/
+    dots: true,
   });
 
   //いいねの処理
-var fav = 0;
 var Pfav=0;
 let timer;
 const ua = navigator.userAgent.toLowerCase();
@@ -302,19 +301,6 @@ b.addEventListener(eventStart,async e => {
     fav++;
     document.getElementById("audio2").play();
     //deta
-    const respG = await fetchJSON("/api/timeline", {});
-    alert(respG.fav1);
-    switch (now) {
-      case 1:fav=respG.fav1; break;
-      case 2:fav=respG.fav2; break;
-      case 3:fav=respG.fav3; break;
-      case 4:fav=respG.fav4; break;
-      case 5:fav=respG.fav5; break;
-      case 6:fav=respG.fav6; break;
-      case 7:fav=respG.fav7; break;
-      case 8:fav=respG.fav8; break;
-      case 9:fav=respG.fav9; break;
-    }
     
     r.textContent = '♡'+fav;
     use_point++;
@@ -333,6 +319,7 @@ b.addEventListener(eventEnd,async e => {
   if (fav) {
     b.classList.remove('active');
     clearInterval(timer);
+    
     const rest = await fetchJSON("/api/fav", {
       data: fav
     })

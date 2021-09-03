@@ -21,6 +21,7 @@ class MyServer extends Server {
                 msg: req.data + "を受け取りました"
               }
         }
+        
         break;
         //写真
         case "/api/camera": {
@@ -58,8 +59,8 @@ class MyServer extends Server {
                 essay7: "テスト",
                 essay8: "テスト",
                 essay9: "テスト",
-                fav1:4,
-                fav2:10,
+                fav1:46000,
+                fav2:1000,
                 fav3:17,
                 fav4:3,
                 fav5:1000,
@@ -90,5 +91,5 @@ class MyServer extends Server {
     }
   }
 }
-new MyServer(8890);
+new MyServer(8001);
 

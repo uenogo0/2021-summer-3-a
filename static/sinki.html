@@ -9,11 +9,14 @@
 </head>
 
 <body>
-    <h2 class="sc_chr" ><a href=index.html><img src="walk.png" alt="" width="150"></a></h2>
-    <h1 class="AC">アカウントの作成</h1>
+    
+     <h2 class="sc_chr" ><a href=index.html><img src="walk.png" alt="" width="150"></a></h2>
+     <h1 class="AC">アカウントの作成</h1>
+     <form>
             <label for="name">名前</label>
             <input type="text" id="name" name="name">
         </div>
+   
         <div>
             <label for="email">メールアドレス</label>
             <input type="mail" id="email" name="email">
@@ -22,14 +25,15 @@
             <label for="pass">パスワード</label>
             <input type="word" id="pass" name="pass">
         </div>
-　　　　<div>
-            性別：
+        <div>
+           <p> 性別：</p>
             <input type="radio" id="gender" name="gender" value="男"> 男
             <input type="radio" id="gender" name="gender" value="女" checked> 女
             <input type="radio" id="gender" name="gender" value="その他"> その他
         </div>　
+    <article class=page-header> 
         <div>
-            生年月日：
+           <p> 生年月日：</p>
             <select name="year">
                 <option value="">-</option>
                 <option value="1900">1900</option>
@@ -218,6 +222,7 @@
                 <option value="31">31</option>
                 </select>　日
         </div>
+    </article> 
         <input type="submit" value="送信する">
     </form>
 </body>

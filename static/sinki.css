@@ -16,13 +16,42 @@ body{
     font-family: sans-serif;
     background: #34495e;
 }
-.box{
-    width: 300px;
-    padding: 40px;
+form{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background: #191919;
-    text-align: center; 
+    top: 25%;
+    left: 41%;
+}
+label{
+    font-size: 1.125rem;
+    margin-bottom: 10px;
+    display: block;
+}
+input[type="text"],
+input[type="mail"],
+input[type="word"],
+textarea {
+   
+    border: 1px #fff solid;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+input[type="text"],
+input[type="mail"],
+input[type="word"] {
+    width: 100%;
+    max-width: 240px;
+}
+/*textarea {
+    width: 100%;
+    max-width: 480px;
+    height: 6rem;
+}*/
+input[type="submit"] {
+   
+}
+
+/*.page-header {
+    display: flex;
+    justify-content: space-between;
 }

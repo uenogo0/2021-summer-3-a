@@ -47,6 +47,7 @@ class MyServer extends Server {
         break;
         //タイムライン
         case "/api/timeline": {
+            Search_posts(1,f:string)
             const resp = {
                 img0: process.argv[5],
                 img1: process.argv[5],

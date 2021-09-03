@@ -70,6 +70,9 @@ btn_close.addEventListener('click', function() {
     document.getElementById("capture").onclick = function() {
       player.pause();
       document.getElementById("audioElement").play();
+      canvas.width = player.videoWidth
+  canvas.height = player.videoHeight
+  canvas.getContext("2d").drawImage(player, 0, 0, canvas.width, canvas.height);
     };
     document.getElementById("send").onclick =async function() {
       document.getElementById("audio2").play();

@@ -214,7 +214,7 @@ function clock() {
       new_element.innerHTML='<img class="shadow" src="'+img[0]+'"alt=""><p class="sc_chr">'+respd.essay+'<p>';
       document.getElementById("time_line").appendChild(new_element);
       for(let i=0; i<=3; i++){
-        
+
       }
       new_element.innerHTML='<img class="shadow" src="'+"road.png"+'"alt=""><p class="sc_chr">'+""+'<p>';
       document.getElementById("time_line").appendChild(new_element);
@@ -239,8 +239,10 @@ $(function() {
   $('li').hide().fadeIn('slow');
 });
     //スライドの設定。現在見ている画像がi
+    var now;
     $('.slider').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
 	    var i = (currentSlide ? currentSlide : 0) + 1;
+      now=i;
 	    $('.slick-num .nowcnt').text(i);
 	    $('.slick-num .allcnt').text(slick.slideCount-1);
       if(i==slick.slideCount){
@@ -293,15 +295,29 @@ const eventStart = isSP ? 'touchstart' : 'mousedown';
 const eventEnd   = isSP ? 'touchend' : 'mouseup';
 const eventLeave = isSP ? 'touchmove' : 'mouseleave';
  
-b.addEventListener(eventStart, e => {
+b.addEventListener(eventStart,async e => {
   e.preventDefault();
   b.classList.add('active');
-  timer = setInterval(() => {
+  timer = setInterval(async() => {
     use_point=localStorage.getItem("use_point");
     if(all-use_point>=0){
     fav++;
     document.getElementById("audio2").play();
     //deta
+    const respG = await fetchJSON("/api/timeline", {});
+    alert(respG.fav1);
+    switch (now) {
+      case 1:fav=respG.fav1; break;
+      case 2:fav=respG.fav2; break;
+      case 3:fav=respG.fav3; break;
+      case 4:fav=respG.fav4; break;
+      case 5:fav=respG.fav5; break;
+      case 6:fav=respG.fav6; break;
+      case 7:fav=respG.fav7; break;
+      case 8:fav=respG.fav8; break;
+      case 9:fav=respG.fav9; break;
+    }
+    
     r.textContent = '♡'+fav;
     use_point++;
     localStorage.setItem("use_point", use_point);

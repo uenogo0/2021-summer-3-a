@@ -59,3 +59,10 @@ body{
 .box input[type = "submit"]:hover{
     background: #2ecc71;
 }
+/* ログイン*/
+.saigo{
+    text-align: right;
+  }
+ .ABC{
+    color: #2ecc71; 
+ } 

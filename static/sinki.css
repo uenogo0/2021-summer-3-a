@@ -6,8 +6,9 @@ html {
     left: 550px
 }
 h1 {
-    text-align:center;
-  padding:20px 0;
+    position: absolute;
+    top: 170px;
+    left: 550px;
 }
 
 body{
@@ -18,8 +19,8 @@ body{
 }
 form{
     position: absolute;
-    top: 25%;
-    left: 41%;
+    top: 240px;
+    left: 550px;
 }
 label{
     font-size: 1.125rem;
@@ -54,4 +55,11 @@ input[type="submit"] {
 /*.page-header {
     display: flex;
     justify-content: space-between;
-}
+}*/
+/* ログイン　*/
+.saigo{
+    text-align: right;
+  }
+ .ABC{
+    color: #2ecc71; 
+ } 

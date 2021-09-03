@@ -1,14 +1,22 @@
 import { Server } from "https://js.sabae.cc/Server.js";
+import {
+    Insert_posts,Search_posts,Update_favorite,Delete_posts
+}from "./posts.ts";
+import {
+    Insert_users,Search_users,Delete_users
+}from "./users.ts";
 class MyServer extends Server {
   api(path, req) {
 
 
     switch (path) {
         case "/data/": {
+            Insert_posts(1," ",req.data);
             return {
               }
         }
         case "/api/send": {
+            Update_favorite(1,req.data);
             return {
                 msg: req.data + "を受け取りました"
               }
@@ -40,8 +48,8 @@ class MyServer extends Server {
         //タイムライン
         case "/api/timeline": {
             const resp = {
-                img0: "https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg",
-                img1: "https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_02.jpg",
+                img0: process.argv[5],
+                img1: process.argv[5],
                 img2: "toriaezu.png",
                 img3: "toriaezu.png",
                 img4: "toriaezu.png",

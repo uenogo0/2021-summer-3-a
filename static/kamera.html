@@ -17,22 +17,24 @@
   </dialog>
   
 <video id="player" autoplay></video><br>
-<form action="#" method="post">
-	<textarea name="comment" cols="100" rows="5" placeholder="コメントを付けて投稿してみよう"></textarea></p>
-</form>
+<textarea id="a" name="comment" cols="100" rows="5" placeholder="コメントを付けて投稿してみよう"></textarea>
 <br><br><br><br><br><br><br><br>
 <button id="capture"><img src="cicon.png" alt="送信" /></button>
 <button type="button" id="ch">
   切り替え
 </button>
 
-<canvas id="canvas" width="0" height="0"></canvas>
+<canvas id="canvas" width="200" height="100"></canvas>
 <h1><a href=index.html>戻る</a></h1>
 
 </body>
 
 <script type=module>
+import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js"
+import { ImageUploader } from "https://code4sabae.github.io/js/ImageUploader.js"
   //ダイアログ用
+var player;
+var context;
 var dialog = document.querySelector('dialog');
 var btn_show = document.getElementById('capture');
 var btn_close = document.getElementById('close');
@@ -48,14 +50,13 @@ btn_close.addEventListener('click', function() {
     const suppoet='mediaDevices' in navigator;
 
     if(suppoet){
-      let player = document.getElementById('player');
+      player = document.getElementById('player');
       const canvas = document.getElementById('canvas');
-      const context = canvas.getContext('2d');
+      context = canvas.getContext('2d');
       const captureButton = document.getElementById('capture');
       const constraints = {video: true,};
       captureButton.addEventListener('click', () => {
         //playerが画像
-      context.drawImage(player, 50, 0, 200, 200);
     });
     navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
@@ -69,19 +70,22 @@ btn_close.addEventListener('click', function() {
       player.pause();
       document.getElementById("audioElement").play();
     };
-    document.getElementById("send").onclick = function() {
+    document.getElementById("send").onclick =async function() {
       document.getElementById("audio2").play();
+      var img01 = new Image();
+      img01.src = "./toriaezu.png";
+      const up = new ImageUploader("/data/")
+      up.setFile(f, 1200, 1024 * 1024)
+      up.onload = async url => {
+      alert(url)
+      }
       //サーバー処理
-      window.location.href = 'index.html'; 
+      const res = await fetchJSON("/api/cameraC", {
+      data: document.getElementById("a").value
+    })
+
+      //window.location.href = 'index.html'; 
     };
-    /*
-    xhr = new XMLHttpRequest();
-    function post() {
-        xhr.open('POST', 'calc.php', true);
-        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-        xhr.send(request);
-    }
-    */
    
 </script>
 </html>

@@ -5,6 +5,10 @@ body{
     font-family: sans-serif;
     background: #34495e;
 }
+.page-header {
+    display: flex;
+    justify-content: space-between;
+}
 .box{
     width: 300px;
     padding: 40px;

@@ -19,7 +19,6 @@
     href="style.css">
 </head>
 <header class=page-header　wrapper>
-  <p class=saigo><a href=account.html>ログイン</a>/<a href=sinki.html>新規会員登録はこちら</a></p>
 <table>
   <td><h1 class="sc_chr" ><a href=index.html><img src="walk.png" alt="" width="150"></a></h1></td>
   <td>&nbsp;</td>
@@ -34,7 +33,6 @@
     </div>
   </td>
 </table>
-
   </header>
 <body>
   <audio id="audio2" src="po.mp3"></audio>
@@ -91,11 +89,10 @@
   <!--ライセンス関係なので消してはいけない-->
   <p>使用したライブラリ：<a href="https://kenwheeler.github.io/slick/" 
     target="_blank">https://kenwheeler.github.io/slick/</a></p>
-    <!--検証用
   <h1><a href=test.html>検証用ページ1</a></h1>
   <h1><a href=test2.html>検証用ページ2</a></h1>
   <h1><a href=test3.html>検証用ページ3</a></h1>
--->
+
     <p>下に引っ張ってカメラを起動</p>
     <img class="cicon" src="cicon.png" alt=""width="30">
     <div id="sbr"></div>
@@ -103,7 +100,6 @@
     <!------------------以下JS--------------------------------------------------------------->
 
     <script >
-      var flg=0;
       //スクロールをしてページ遷移
       $(window).bind("scroll", function() {
         scrollHeight = $(document).height();
@@ -168,6 +164,8 @@ function getSteps( dataSources ) {
     });
 
 }
+
+      //コレが怪しいと睨んでいる
 window.onload = getToken;
 
 function timestamp2datetime( ts ){
@@ -189,39 +187,29 @@ function timestamp2datetime( ts ){
 }
 
 //表示
-timer = setInterval('clock()',100); 
+timer = setInterval('clock()',1000); 
 function clock() {
   var use_point=localStorage.getItem("use_point");
-  flg=use_point;
-  if(all-flg>=-1){
 	document.getElementById('tab1_cnt').innerHTML = all-use_point+1 ;
   document.getElementById('tab2_cnt').innerHTML = alld ;
   document.getElementById('tab3_cnt').innerHTML = all+1 ;
-  }
 }
 
 //////////////ここまで歩数取得の処理/////////////////
       </script>
     <script type=module>
         import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js"
-3
+
       //タイムライン
       const respd = await fetchJSON("/api/timeline", {});
-      let img = [respd.img1, respd.img2, respd.img3,
-       respd.img4, respd.img5,respd.img6,respd.img7,respd.img8,respd.img9]
-      let essay = [respd.essay1,respd.essay2,respd.essay3,respd.essay4,respd.essay5,respd.essay6,
-      respd.essay7,respd.essay8,respd.essay9]
+      let img = [respd.img0, respd.img1]
       var new_element= document.createElement("li");
-      //new_element.innerHTML='<p class="sc_chr">asdf<p>';
-      new_element.innerHTML='<img class="shadow" src="'+img[0]+'"alt=""><p class="sc_chr">'+respd.essay+'<p>';
+      new_element.innerHTML='<img class="shadow" src="'+img[0]+'"alt=""><p class="sc_chr">'+respd.essay+'<p></li>';
       document.getElementById("time_line").appendChild(new_element);
-      for(let i=1; i<=8; i++){
-        var new_element= document.createElement("li");
-        new_element.innerHTML='<img class="shadow" src="'+img[i]+'"alt=""><p class="sc_chr">'+essay[i]+'<p>';
-        document.getElementById("time_line").appendChild(new_element);
+      for(let i=0; i<=3; i++){
+        new_element.innerHTML='<img class="shadow" src="'+img[i]+'"alt=""><p class="sc_chr">'+respd.essay+'<p></li>';
+      document.getElementById("time_line").appendChild(new_element);
       }
-      new_element.innerHTML='<img class="shadow" src="'+"road.png"+'"alt=""><p class="sc_chr">'+""+'<p>';
-      document.getElementById("time_line").appendChild(new_element);
         //ローカルストレージ
         var use_point = localStorage.getItem("use_point");
         if (use_point){
@@ -243,30 +231,14 @@ $(function() {
   $('li').hide().fadeIn('slow');
 });
     //スライドの設定。現在見ている画像がi
-    
-var fav = 0;
-var respG;
-    var nowi;
-    $('.slider').on('init reInit afterChange',async function (event, slick, currentSlide, nextSlide) {
+    $('.slider').on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
 	    var i = (currentSlide ? currentSlide : 0) + 1;
-      nowi=i;
 	    $('.slick-num .nowcnt').text(i);
 	    $('.slick-num .allcnt').text(slick.slideCount-1);
-      respG = await fetchJSON("/api/timeline", {});
-    //alert(respG.fav1);
-    switch (nowi) {
-      case 1:fav=respG.fav1; break;
-      case 2:fav=respG.fav2; break;
-      case 3:fav=respG.fav3; break;
-      case 4:fav=respG.fav4; break;
-      case 5:fav=respG.fav5; break;
-      case 6:fav=respG.fav6; break;
-      case 7:fav=respG.fav7; break;
-      case 8:fav=respG.fav8; break;
-      case 9:fav=respG.fav9; break;
-    }
-    r.textContent = '♡'+fav;
       if(i==slick.slideCount){
+        ////////////////////////////////////
+        //更新の処理を書く場所//歩数も減らす
+        /////////////////////////////////
     if(all>=use_point){
         use_point=Number(localStorage.getItem("use_point"));
         use_point+=500;
@@ -284,10 +256,28 @@ var respG;
     variableWidth: true,
     prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
     nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
-    dots: true,
+    dots: true,//下部ドットナビゲーションの表示
+    /*
+    responsive: [
+      {
+      breakpoint: 769,//モニターの横幅
+      settings: {
+        slidesToShow: 1,//スライドを画面に見せる枚数
+        slidesToScroll: 1,//移動量
+      }
+    },
+    {
+      breakpoint: 426,//モニターの横幅
+      settings: {
+        slidesToShow: 1,//スライドを画面に見せる枚数
+        slidesToScroll: 1,//移動量
+      }
+    }
+  ]*/
   });
 
   //いいねの処理
+var fav = 0;
 var Pfav=0;
 let timer;
 const ua = navigator.userAgent.toLowerCase();
@@ -298,56 +288,39 @@ const eventStart = isSP ? 'touchstart' : 'mousedown';
 const eventEnd   = isSP ? 'touchend' : 'mouseup';
 const eventLeave = isSP ? 'touchmove' : 'mouseleave';
  
-b.addEventListener(eventStart,async e => {
+b.addEventListener(eventStart, e => {
   e.preventDefault();
   b.classList.add('active');
-  timer = setInterval(async() => {
+  timer = setInterval(() => {
     use_point=localStorage.getItem("use_point");
-    if(all-use_point>=0){
+    if(all>=use_point){
     fav++;
     document.getElementById("audio2").play();
     //deta
-    
     r.textContent = '♡'+fav;
     use_point++;
     localStorage.setItem("use_point", use_point);
-    }else{
-    b.classList.remove('active');
-    clearInterval(timer);
-  }
+    }
   }, 10);
 })
  
 b.addEventListener(eventEnd,async e => {
-  use_point=localStorage.getItem("use_point");
-    if(all-use_point>=0){
   e.preventDefault();
   if (fav) {
     b.classList.remove('active');
     clearInterval(timer);
-    
     const rest = await fetchJSON("/api/fav", {
       data: fav
     })
     Pfav=0;
-  }else{
-    b.classList.remove('active');
-    clearInterval(timer);
   }
-}
 });
 
 b.addEventListener(eventLeave, e => {
-  use_point=localStorage.getItem("use_point");
-    if(all-use_point>=0){
-
+  e.preventDefault();
   let el;
   el = isSP ? document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) : b;
   if (!isSP || el !== b) {
-    b.classList.remove('active');
-    clearInterval(timer);
-  }
-}else {
     b.classList.remove('active');
     clearInterval(timer);
   }

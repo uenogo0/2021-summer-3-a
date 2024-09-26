@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head></head>
+<body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://apis.google.com/js/client.js"></script>
+<script>
+const client_id = '257557913365-laane8a72mfmku213mnhmgmh4jm4ur11.apps.googleusercontent.com';
+const scope = ['https://www.googleapis.com/auth/fitness.activity.read'];
+let access_token = '';
+function getToken() {
+    gapi.auth.authorize({client_id: client_id, scope: scope, immediate: false, response_type: 'token'}, mycallback);
+}
+
+function mycallback(e) {
+    access_token = e.access_token;
+    fetch('https://www.googleapis.com/fitness/v1/users/me/dataSources?access_token=' + access_token)
+        .then(response => {
+            return response.json();
+        })
+        .then(json => {
+            getSteps( json.dataSource );
+        })
+}
+function getSteps( dataSources ) {
+
+    var all=0;
+    var alld=0;
+
+    var now = new Date();
+    var Year = now.getFullYear();
+    var Month = now.getMonth()+1;
+    var Dat = now.getDate();
+    var time0=Year+"/"+Month+"/"+Dat+" 0:00:00";
+    const start = new Date('2000/1/1 0:00:00').getTime();
+    const dayM = new Date(time0).getTime();
+    const end = Date.now();
+
+    dataSources.forEach( function( dataSource ){
+      var id = dataSource.dataStreamId;
+
+      fetch('https://www.googleapis.com/fitness/v1/users/me/dataSources/' + id + '/datasets/'+start.toString()+'000000'+'-'+end.toString()+'000000?access_token=' + access_token)
+          .then(response => {
+              return response.json();
+          })
+          .then(json => {
+              var points = json.point;
+              if(id=="derived:com.google.step_count.delta:com.google.android.gms:merge_step_deltas"){
+                for( var i = 0; i < points.length; i ++ ){
+                var point = points[i];
+                var ts = parseInt( point.modifiedTimeMillis );
+                var datetime = timestamp2datetime( ts );
+                const deltaT = new Date(datetime).getTime();
+                all+=point.value[0].intVal;
+                if(deltaT>dayM)alld+=point.value[0].intVal;
+              }
+              alert(all);
+              alert(alld)
+              }
+          });
+    });
+
+}
+//コレが怪しいと睨んでいる
+window.onload = getToken;
+
+function timestamp2datetime( ts ){
+  var dt = new Date( ts );
+  var y = dt.getFullYear();
+  var m = dt.getMonth() + 1;
+  var d = dt.getDate();
+  var h = dt.getHours();
+  var n = dt.getMinutes();
+  var s = dt.getSeconds();
+
+  var datetime = y
+    + '/' + ( m < 10 ? '0' : '' ) + m
+    + '/' + ( d < 10 ? '0' : '' ) + d
+    + ' ' + ( h < 10 ? '0' : '' ) + h
+    + ':' + ( n < 10 ? '0' : '' ) + n
+    + ':' + ( s < 10 ? '0' : '' ) + s;
+  return datetime;
+}
+</script>
+<h1><a href=index.html>戻る</a></h1>
+</body>
+</html>

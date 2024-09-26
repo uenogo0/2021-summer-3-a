@@ -1,0 +1,87 @@
+<html lang="ja">
+<head>
+   <meta charset="utf-8">
+   <meta name="profile-PAGE" content="gannbaru">
+   <title></title>
+
+   <!-- CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+      <link rel="stylesheet" href="style-profile.css">
+   <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
+<link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/css/6-1-6.css">
+   
+  
+   
+</head>
+
+<body>
+  <p class=saigo><a href=account.html>ログイン</a>/<a href=sinki.html>新規会員登録はこちら</a></p>
+    <header class="page-header">
+        <h1><a href="index.html"><img src="walk.png" alt="" width="150"></imgsrc></a>ユーザー名</h1>
+        <div class="wrap">
+            <div class="block">
+              <span class=BOTAN>フォロー</span>
+              <input class="BOX" ta-index="0" id="cheap" type="checkbox" />
+              <label for="cheap"></label>
+            </div>   
+        </div>
+    </header>
+    <article class="sute">
+        <ul class=follow>
+            <li><p>フォロー</p><span id=FF></span></li>
+            <li><p>フォロワー</p><span id=FW></span></li>
+            <li><p>いいねした数</p><span id=LOVE></span></li>
+            <li><p>いいねされた数</p><span id=like></span></li>
+            <li><p>今日の歩数</p><span id=walk></span></li>
+            <li><p>今日までの歩数</p><span id=AW></span></li>
+            </p></li>    
+        </ul>
+    </article>
+    <section>
+　　　　<h2>今までの投稿</h2>
+      </section>
+<main>
+      
+
+<ul class="slider">
+  <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_01.jpg" alt="">
+    <p class="sc_chr">コレはテストです１<p></li></li>
+  <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_02.jpg" alt="">
+    <p class="sc_chr">コレはテストです２<p></li></li>
+  <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_03.jpg" alt="">
+    <p class="sc_chr">コレはテストです３<p></li></li>
+  <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_04.jpg" alt="">
+    <p class="sc_chr">コレはテストです４<p></li></li>
+  <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_05.jpg" alt="">
+    <p class="sc_chr">コレはテストです５<p></li></li>
+  <li><img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/img/img_06.jpg" alt="">
+    <p class="sc_chr">コレはテストです６<p></li></li>
+<!--/slider--></ul>
+<p>使用したライブラリ：<a href="https://kenwheeler.github.io/slick/" target="_blank">https://kenwheeler.github.io/slick/</a></p>
+  
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-6/js/6-1-6.js"></script>
+</main>
+
+      <script type="module">
+        import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
+        const resp = await fetchJSON("/api/follow", {});
+        console.log(resp)
+        const ff = document.getElementById("FF")
+        ff.textContent = resp.count
+        const fw = document.getElementById("FW")
+        fw.textContent = resp.FWcount
+        const lo = document.getElementById("LOVE")
+        lo.textContent = resp.LOcount
+        const li = document.getElementById("like")
+        li.textContent = resp.LIcount
+        const wa = document.getElementById("walk")
+        wa.textContent = resp.WAcount
+        const aw = document.getElementById("AW")
+        aw.textContent = resp.AWcount
+      </script>
+</body>
+</html>

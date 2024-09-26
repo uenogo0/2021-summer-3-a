@@ -1,0 +1,38 @@
+<input type="file" id="inputFile">
+<button onclick="upload()">アップ</button>
+
+<script type="module">
+  import { ImageUploader } from "https://code4sabae.github.io/js/ImageUploader.js"
+  var img01 = new Image();
+    img01.src = "./toriaezu.png";
+
+    const fileName = 'img.jpg';
+    //let link = document.getElementById("download");
+    link.href= url;
+    link.download = fileName;
+
+  window.upload = async () => {
+    const f = inputFile.files[0]
+    const up = new ImageUploader("/data/")
+    up.setFile(f, 1200, 1024 * 1024)
+    up.onload = async url => {
+      alert(url)
+    }
+
+  }
+</script>
+<!--<input id="a" type="text">
+<button onclick="send()">送る</button>
+
+<script type="module">
+  import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js"
+
+  window.send = async () => {
+    const res = await fetchJSON("/api/send", {
+      data: document.getElementById("a").value
+    })
+    alert(res.msg)
+  }
+    
+//acync
+</script>-->

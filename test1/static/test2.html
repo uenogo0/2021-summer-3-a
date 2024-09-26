@@ -1,0 +1,41 @@
+<button id ="find-me">Show my location</button><br/>
+<p id = "status"></p>
+<p id="watDate"></p>
+<a id = "map-link" target="_blank"></a>
+<script type="text/javascript">
+    var latitude=0;
+    var longitude=0;
+    function geoFindMe(){
+        const status =document.querySelector('#status');
+        const mapLink=document.querySelector('#map-link');
+        mapLink.href='';
+        mapLink.textContent='';
+        function success(position){
+            latitude =position.coords.latitude;
+            longitude =position.coords.longitude;
+            document.getElementById("watDate").innerHTML   = (new Date()).toString();
+            status.textContent='';
+            mapLink.href=`https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+            mapLink.textContent=`Latitude: ${latitude} °, Longitude: ${longitude} °`;
+
+        }
+        function error(){
+            status.textContent='Unable to retrieve your location';
+        }
+        if(!navigator.geolocation){
+            status.textContent='Geolocation is not supported by your browser';
+        }else{
+            status.textContent='Locating...';
+            navigator.geolocation.watchPosition(success,error);
+        }
+    }
+    document.querySelector('#find-me').addEventListener('click', geoFindMe);
+    //標準時線からの整数の距離（ｍ）
+    //一桁目を０にして同じグループに分ければ、投稿を１０メートルのごとに分けられる
+    var x=0;//緯度
+    var y=0;//軽度
+    if(latitude>0)x=Math.floor(Math.sqrt(Math.pow((latitude-36)/ 0.0111,2)));
+    else x=Math.floor(Math.sqrt(Math.pow((latitude-36)/ 0.0111,2)))*-1;
+    if(longitude>0)y=Math.floor(Math.pow((longitude-135) / 0.0091, 2));
+    else y=Math.floor(Math.pow((longitude-135) / 0.0091, 2))*-1;
+</script>
